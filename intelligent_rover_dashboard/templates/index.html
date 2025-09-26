@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>🌱 Intelligent Pesticide Sprinkling System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <section class="dashboard-header">
+      <h1>📊 Welcome to Your Dashboard</h1>
+      <p>Track insights, manage data, and monitor your progress at a glance.</p>
+    </section>
+    <nav>
+      <div class="navbar" id="navbar">
+        <!-- Logo -->
+        <div class="logo">
+          <svg
+            width="72"
+            height="30"
+            viewBox="0 0 72 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- same paths -->
+            <path
+              d="M9.8393 10.2032C4.22951 10.3257 -0.0459221 14.7356 0.000372391 20.2752C0.0412204 25.3548 4.57808 30.3608 10.6862 29.9226C15.5145 29.5768 19.9015 25.4119 19.8525 20.0057C19.8035 14.5995 15.1904 10.0916 9.8393 10.2032Z"
+              fill="currentColor"
+            ></path>
+            <path
+              d="M62.8086 29.4855H67.1222V10.6372H62.8086V29.4855Z"
+              fill="currentColor"
+            ></path>
+            <path
+              d="M67.6816 0.172852V6.13439H71.5322C71.6738 6.13439 71.8046 6.13439 72.0006 6.11534V0.172852H67.6816Z"
+              fill="currentColor"
+            ></path>
+            <path
+              d="M31.5648 25.7016C28.5393 25.7016 26.0667 23.1156 26.0776 19.9851C26.0936 18.5291 26.6764 17.1366 27.7023 16.1029C28.7282 15.0692 30.1166 14.4757 31.573 14.4482C32.4198 14.4541 33.2537 14.6557 34.0095 15.0373C34.7654 15.4188 35.4227 15.97 35.9301 16.6477L40.0667 15.0144C38.2884 12.0853 35.0669 10.1145 31.4995 10.1989C25.8897 10.3214 21.6142 14.7313 21.6605 20.2709C21.7014 25.3505 26.2382 30.3565 32.3464 29.9183C33.9908 29.7803 35.5761 29.2408 36.9631 28.347C38.3501 27.4532 39.4963 26.2326 40.3009 24.7924L36.2542 22.9931C35.7705 23.8086 35.0851 24.486 34.2638 24.9604C33.4426 25.4347 32.5132 25.69 31.5648 25.7016Z"
+              fill="currentColor"
+            ></path>
+            <path
+              d="M52.4097 10.1387C51.2512 10.1119 50.1066 10.3947 49.0941 10.958C48.0816 11.5212 47.2379 12.3445 46.6501 13.3427V0.172852H42.293V29.4688H46.6501C46.6501 29.1721 46.6501 18.7816 46.6501 18.7816C46.6501 15.6946 47.8619 13.4352 50.8084 13.4352C54.6046 13.4352 54.6209 17.4178 54.6209 19.6962C54.6209 22.9165 54.6209 25.5189 54.6209 28.7393V29.4987H59.0271C59.0271 29.3708 59.0488 29.2728 59.0488 29.1721C59.0488 25.5108 59.0951 21.8522 59.0325 18.1909C58.9916 15.6538 58.5015 10.1387 52.4097 10.1387Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Links -->
+        <div class="links">
+          <a href="http://localhost:5173/Home"><span>Home</span></a>
+          <a href="http://localhost:5173/Problem_Statement"
+            ><span>Problem Statement</span></a
+          >
+          <a href="http://localhost:5173/about-us"><span>About Us</span></a>
+          <a href="http://localhost:5000" target="_blank" class="active"
+            ><span>Dashboard</span></a
+          >
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="http://localhost:5173/contact-us"><span>Contact us</span></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <h1>Live Data and Insights</h1>
+      <div class="main-sections">
+        <!-- Sensor Data Section -->
+        <section id="sensors">
+          <h2>📊 Sensor Data</h2>
+          <div class="grid">
+            <div class="card" id="card-ph">
+              pH: <span id="ph">--</span>
+              <div class="range" id="range-ph"></div>
+            </div>
+            <div class="card" id="card-moisture">
+              Soil Moisture: <span id="moisture">--</span>%
+              <div class="range" id="range-moisture"></div>
+            </div>
+            <div class="card" id="card-temp">
+              Temperature: <span id="temp">--</span> °C
+              <div class="range" id="range-temp"></div>
+            </div>
+            <div class="card" id="card-humidity">
+              Humidity: <span id="humidity">--</span>%
+              <div class="range" id="range-humidity"></div>
+            </div>
+            <div class="card" id="card-iaq">
+              IAQ: <span id="iaq">--</span>
+              <div class="range" id="range-iaq"></div>
+            </div>
+            <div class="card" id="card-co2">
+              CO₂: <span id="co2">--</span> ppm
+              <div class="range" id="range-co2"></div>
+            </div>
+          </div>
+        </section>
+        <!-- Plant Health Insights Section -->
+        <section id="analysis">
+          <h2>🌿 Plant Health Insights</h2>
+          <div class="insights-box">
+            <ul id="insights"></ul>
+          </div>
+        </section>
+        <div class="graph">
+          <h1 class="graph-h1">Data Analysis With Graph</h1>
+          <section id="graph-analysis">
+            <div class="graph-box">
+              <h2>📈 Sensor Data Trends</h2>
+              <canvas id="sensorChart"></canvas>
+            </div>
+
+            <div class="graph-box">
+              <h2>📊 Sensor Data Histogram</h2>
+              <canvas id="histogramChart"></canvas>
+            </div>
+          </section>
+          <section id="disease-detect">
+            <h2>🪴 Plant Disease Detection</h2>
+            <form id="diseaseForm">
+              <input type="file" id="plantImage" accept="image/*" required />
+              <button type="submit">Predict</button>
+            </form>
+            <div id="predictionResult"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <elevenlabs-convai
+      agent-id="agent_4101k5xt5e14echrka1x2bw29f28"
+    ></elevenlabs-convai>
+    <script
+      src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+      async
+      type="text/javascript"
+    ></script>
+    <footer>
+      <p>© 2025 Intelligent Farming Systems | Sustainable Agriculture</p>
+    </footer>
+
+ 
+    <script>
+      document
+  .getElementById("diseaseForm")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const fileInput = document.getElementById("plantImage");
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/predict", { method: "POST", body: formData });
+      const data = await res.json();
+      const resultDiv = document.getElementById("predictionResult");
+
+      // Fetch latest sensor data
+      const sensorRes = await fetch("/api/data");
+      const sensors = await sensorRes.json();
+
+      const normal = {
+        pH: [5.5, 7.5],
+        soil_moisture: [30, 60],
+        temperature: [15, 30],
+        humidity: [30, 70],
+        iaq: [0, 100],
+        co2: [300, 1000],
+      };
+
+      function getClassColor(value, range) {
+        if (value < range[0] || value > range[1]) return "danger";
+        const margin = (range[1] - range[0]) * 0.2;
+        if (value < range[0] + margin || value > range[1] - margin) return "warn";
+        return "ok";
+      }
+
+      // Build the prediction + sensor card
+     resultDiv.innerHTML = `
+<div id="diseasePredictionContainer" class="disease-container">
+
+  <!-- Left: Disease + Sensor Data -->
+  <div class="prediction-card">
+    <div id="pdata">
+      <p><strong>Prediction:</strong> ${data.prediction}</p>
+      <p><strong>Confidence:</strong> ${data.confidence}%</p>
+      <img src="${data.image_path}" alt="Plant Image" width="200" />
+    </div>
+
+    <div id="sdata">
+      <h4>🌿 Sensor Data</h4>
+      <ul>
+        <li class="${getClassColor(sensors.pH, normal.pH)}">pH: ${sensors.pH}</li>
+        <li class="${getClassColor(sensors.soil_moisture, normal.soil_moisture)}">
+          Soil Moisture: ${sensors.soil_moisture}%
+        </li>
+        <li class="${getClassColor(sensors.temperature, normal.temperature)}">
+          Temperature: ${sensors.temperature}°C
+        </li>
+        <li class="${getClassColor(sensors.humidity, normal.humidity)}">
+          Humidity: ${sensors.humidity}%
+        </li>
+        <li class="${getClassColor(sensors.iaq, normal.iaq)}">IAQ: ${sensors.iaq}</li>
+        <li class="${getClassColor(sensors.co2, normal.co2)}">CO₂: ${sensors.co2} ppm</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right: Recommendations -->
+  <div id="recommendations" class="recommendation-card">
+    <h4>💡 Recommended Actions</h4>
+    <ul id="recommendationList"></ul>
+  </div>
+
+</div>
+`;
+
+
+      // Populate recommendations
+      const recommendationList = document.getElementById("recommendationList");
+      recommendationList.innerHTML = "";
+
+      // Sensor-based
+      if (sensors.soil_moisture < normal.soil_moisture[0])
+        recommendationList.innerHTML += "<li>💧 Soil is dry, irrigate plants.</li>";
+      if (sensors.soil_moisture > normal.soil_moisture[1])
+        recommendationList.innerHTML += "<li>🚱 Soil is waterlogged, improve drainage.</li>";
+      if (sensors.pH < normal.pH[0])
+        recommendationList.innerHTML += "<li>🧂 Soil acidic, add lime.</li>";
+      if (sensors.pH > normal.pH[1])
+        recommendationList.innerHTML += "<li>🧂 Soil alkaline, add sulfur.</li>";
+      if (sensors.temperature > normal.temperature[1])
+        recommendationList.innerHTML += "<li>🌡️ High temperature, provide shade/ventilation.</li>";
+      if (sensors.humidity > normal.humidity[1])
+        recommendationList.innerHTML += "<li>💨 High humidity, improve airflow.</li>";
+
+      // Disease-based
+      if (data.prediction.toLowerCase().includes("blight"))
+        recommendationList.innerHTML += "<li>🧴 Detected blight, apply fungicide.</li>";
+      if (data.prediction.toLowerCase().includes("healthy"))
+        recommendationList.innerHTML += "<li>✅ Plant healthy, maintain care.</li>";
+
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
